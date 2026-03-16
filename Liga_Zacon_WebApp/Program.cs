@@ -1,3 +1,5 @@
+using Liga_Zacon_WebApp.Extensions;
+
 namespace Liga_Zacon_WebApp
 {
     public class Program
@@ -9,6 +11,8 @@ namespace Liga_Zacon_WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddPersistence(builder.Configuration);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -18,6 +22,8 @@ namespace Liga_Zacon_WebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.ApplyMigration();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

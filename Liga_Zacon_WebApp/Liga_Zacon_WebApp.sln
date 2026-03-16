@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36811.4 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liga_Zacon_WebApp", "Liga_Zacon_WebApp.csproj", "{1EAB81C4-391A-411D-BC3D-A60ACEC8BE95}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "..\Domain\Domain.csproj", "{FDA25085-5D48-4322-A87A-79870D296256}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{3A535153-D8BB-423F-B24E-BA1A5BA7D275}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{1EAB81C4-391A-411D-BC3D-A60ACEC8BE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EAB81C4-391A-411D-BC3D-A60ACEC8BE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EAB81C4-391A-411D-BC3D-A60ACEC8BE95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA25085-5D48-4322-A87A-79870D296256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA25085-5D48-4322-A87A-79870D296256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA25085-5D48-4322-A87A-79870D296256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA25085-5D48-4322-A87A-79870D296256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A535153-D8BB-423F-B24E-BA1A5BA7D275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A535153-D8BB-423F-B24E-BA1A5BA7D275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A535153-D8BB-423F-B24E-BA1A5BA7D275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A535153-D8BB-423F-B24E-BA1A5BA7D275}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
