@@ -27,5 +27,8 @@ public class ArticleConfiguration: IEntityTypeConfiguration<Article>
             .IsRequired();
 
         builder.Property(e => e.Tag);
+
+        builder.HasIndex(e => e.Title);
+        builder.HasIndex(e => e.Tag);
     }
 }
