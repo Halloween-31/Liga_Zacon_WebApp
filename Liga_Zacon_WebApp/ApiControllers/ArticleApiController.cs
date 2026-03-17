@@ -1,6 +1,5 @@
 ﻿using Application.Abstractions.Services;
 using Domain.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Liga_Zacon_WebApp.ApiControllers;
@@ -24,6 +23,7 @@ public class ArticleApiController : Controller
         {
             return NotFound();
         }
+
         return Ok(article);
     }
 
@@ -48,11 +48,13 @@ public class ArticleApiController : Controller
         {
             return BadRequest();
         }
+
         var result = await _articleService.UpdateAsync(article, cancellationToken);
         if (!result)
         {
             return NotFound();
         }
+
         return NoContent();
     }
 
@@ -64,6 +66,7 @@ public class ArticleApiController : Controller
         {
             return NotFound();
         }
+
         return NoContent();
     }
 
@@ -79,5 +82,21 @@ public class ArticleApiController : Controller
     {
         var articles = await _articleService.SearchByTitleAsync(title, cancellationToken);
         return Ok(articles);
+    }
+
+    [HttpPost("paged")]
+    public async Task<IActionResult> GetPagedList(int page = 0, int size = 10, string searchTerm = "",
+        CancellationToken cancellationToken = default)
+    {
+        var articles = await _articleService.GetPagedListAsync(page, size, searchTerm, cancellationToken);
+        return PartialView("Partial/Table", articles);
+    }
+
+    [HttpPost("paged-by-tags")]
+    public async Task<IActionResult> GetPagedByTagsList(int page = 0, int size = 10, string tag = "",
+        CancellationToken cancellationToken = default)
+    {
+        var articles = await _articleService.GetPagedByTagsListAsync(page, size, tag, cancellationToken);
+        return PartialView("Partial/Table", articles);
     }
 }

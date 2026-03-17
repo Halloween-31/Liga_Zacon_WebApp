@@ -64,4 +64,28 @@ public class ArticleService : IArticleService
     {
         return await _unitOfWork.ArticleRepository.SearchByTitleAsync(title, cancellationToken);
     }
+
+    public async Task<IReadOnlyList<Article>> GetPagedListAsync(int page = 0, int size = 10,
+        string searchTerm = "",
+        CancellationToken cancellationToken = default)
+    {
+        return await _unitOfWork.ArticleRepository.GetPagedListAsync(page, size, searchTerm, cancellationToken);
+    }
+
+    public async Task<int> GetItemsCount()
+    {
+        return await _unitOfWork.ArticleRepository.GetItemsCount();
+    }
+
+    public async Task<IReadOnlyList<string>> GetAllTagsAsync(CancellationToken cancellationToken = default)
+    {
+        return await _unitOfWork.ArticleRepository.GetAllTagsAsync(cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<Article>> GetPagedByTagsListAsync(int page = 0, int size = 10, string tag = "",
+        CancellationToken cancellationToken = default)
+    {
+        return await _unitOfWork.ArticleRepository.GetPagedListByTagAsync(page, size, tag, cancellationToken);
+
+    }
 }

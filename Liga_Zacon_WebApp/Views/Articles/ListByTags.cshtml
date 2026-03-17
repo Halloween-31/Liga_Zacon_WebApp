@@ -1,19 +1,29 @@
-﻿@model IEnumerable<Domain.Entities.Article>
-
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
 @{
-    ViewData["Title"] = "Articles";
 }
 
-<h1>Articles</h1>
-<input id="page" style="display: none" type="text" value="1" />
+@model IEnumerable<Domain.Entities.Article>
+
+@{
+	ViewData["Title"] = "Articles";
+	var tags = ViewData["Tags"] as List<string> ?? [];
+}
+
+<h1>Articles By Tags</h1>
+<input id="page" style="display: none" type="text" value="2" />
 
 <div class="d-flex justify-content-between">
 	<p>
 		<a asp-action="Create">Create New</a>
 	</p>
-	<div class="d-flex align-items-end">
-		<label class="form-label">Search:</label>
-		<input id="searchInput" class="form-control" type="text" />
+	<div class="d-flex align-items-center btn-group">
+		<label>Tags:</label>
+		@foreach (var tag in tags)
+		{
+			<button class="btn btn-secondary" href="#">@tag</button>
+		}
 	</div>
 </div>
 <table id="articlesTable" class="table">

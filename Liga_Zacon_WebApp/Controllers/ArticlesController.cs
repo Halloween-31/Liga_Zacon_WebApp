@@ -23,7 +23,7 @@ namespace Liga_Zacon_WebApp.Controllers
         // GET: Articles
         public async Task<IActionResult> Index(CancellationToken cancellationToken)
         {
-            return View(await _articleService.ListAsync(cancellationToken));
+            return View(await _articleService.GetPagedListAsync(cancellationToken: cancellationToken)); //  Enumerable.Empty<Article>()
         }
 
         // GET: Articles/Details/5
@@ -128,6 +128,13 @@ namespace Liga_Zacon_WebApp.Controllers
                 throw new Exception();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        // GET: List By Tags
+        public async Task<IActionResult> ListByTags(CancellationToken cancellationToken)
+        {
+            ViewData["Tags"] = await _articleService.GetAllTagsAsync(cancellationToken);
+            return View(await _articleService.GetPagedListAsync(cancellationToken: cancellationToken)); //  Enumerable.Empty<Article>()
         }
     }
 }
