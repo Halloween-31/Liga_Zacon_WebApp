@@ -8,11 +8,13 @@ public class UnitOfWork : IUnitOfWork
     public AppDbContext _context { get; }
 
     public IArticleRepository ArticleRepository { get; }
+    public IProductRepository ProductRepository { get; }
 
-    public UnitOfWork(AppDbContext context, IArticleRepository articleRepository)
+    public UnitOfWork(AppDbContext context, IArticleRepository articleRepository, IProductRepository productRepository)
     {
         _context = context;
         ArticleRepository = articleRepository;
+        ProductRepository = productRepository;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

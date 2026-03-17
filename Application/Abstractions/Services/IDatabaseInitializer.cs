@@ -2,5 +2,6 @@
 
 public interface IDatabaseInitializer
 {
-    Task SeedAsync(CancellationToken cancellationToken = default);
+    Task ArticleSeedAsync(CancellationToken cancellationToken = default);
+    Task ProductSeedAsync(CancellationToken cancellationToken = default);
 }

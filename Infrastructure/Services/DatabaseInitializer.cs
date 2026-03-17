@@ -1,6 +1,9 @@
-﻿using Application.Abstractions.Services;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using Application.Abstractions.Services;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Liga_Zacon_WebApp.ApiContracts.Product;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services;
@@ -14,7 +17,7 @@ public class DatabaseInitializer : IDatabaseInitializer
         _context = context;
     }
 
-    public async Task SeedAsync(CancellationToken cancellationToken = default)
+    public async Task ArticleSeedAsync(CancellationToken cancellationToken = default)
     {
         if (await _context.Articles.AnyAsync(cancellationToken))
         {
@@ -36,5 +39,30 @@ public class DatabaseInitializer : IDatabaseInitializer
 
         await _context.Articles.AddRangeAsync(articles, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task ProductSeedAsync(CancellationToken cancellationToken = default)
+    {
+        if (await _context.Products.AnyAsync(cancellationToken))
+        {
+            return;
+        }
+
+        using var client = new HttpClient();
+        HttpResponseMessage response = await client.GetAsync("https://fakestoreapi.com/products", cancellationToken);
+
+        if (response.IsSuccessStatusCode)
+        {
+            string responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
+            var productDto = JsonSerializer.Deserialize<IEnumerable<ProductApiResponseDTO>>(responseBody) ?? [];
+
+            var products = new List<Product>();
+            foreach (var dto in productDto)
+            {
+                products.Add(dto.ToEntity());
+            }
+            await _context.Products.AddRangeAsync(products, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

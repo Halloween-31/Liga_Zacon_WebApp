@@ -15,7 +15,8 @@ public static class PersistenceWebApplicationExtensions
         if (app.Environment.IsDevelopment())
         {
             var initializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializer>();
-            initializer.SeedAsync().GetAwaiter().GetResult();
+            initializer.ArticleSeedAsync().GetAwaiter().GetResult();
+            initializer.ProductSeedAsync().GetAwaiter().GetResult();
         }
 
         return app;
